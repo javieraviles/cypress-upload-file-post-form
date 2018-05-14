@@ -4,6 +4,11 @@ Solution for two Cypress testing use-cases I came across with: perform a direct 
 
 For both cases, the file to be uploaded / sent in the form will be placed in [fixtures](https://docs.cypress.io/api/commands/fixture.html#Syntax) folder so it can be loaded by cypress.
 
+To build these workarounds, I found useful these two links:
+
+[Cypress Issue #170](https://github.com/cypress-io/cypress/issues/170)
+[StackOverflow](https://stackoverflow.com/questions/47533989/upload-file-with-cypress-io-via-request)
+
 
 ## First scenario (upload_file_to_form_spec.js):
 
