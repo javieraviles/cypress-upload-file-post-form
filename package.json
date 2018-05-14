@@ -1,0 +1,38 @@
+{
+  "name": "cypress-upload-file-post-form",
+  "version": "1.0.0",
+  "description": "Solution for two Cypress testing use-cases I came across with: perform a direct http FORM request to the server containing a file and other parameters and upload a file into a form before submission",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run --browser chrome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javieraviles/cypress-upload-file-post-form.git"
+  },
+  "keywords": [
+    "cypress",
+    "cypress.io",
+    "file",
+    "file-upload",
+    "submit",
+    "form",
+    "form-data",
+    "post",
+    "request",
+    "http",
+    "xmlhttprequest",
+    "e2e-testing",
+    "api-testing",
+    "cypress.io"
+  ],
+  "author": "Javier Aviles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/javieraviles/cypress-upload-file-post-form/issues"
+  },
+  "homepage": "https://github.com/javieraviles/cypress-upload-file-post-form#readme",
+  "devDependencies": {
+    "cypress": "^2.1.0"
+  }
+}
