@@ -74,7 +74,7 @@ describe('Testing the excel form', function () {
 I want to build up the FormData myself( new FormData(), formData.append/formData.set ) and send it directly with a POST request to the backend or submit the form with the FormData I have created.
 
 For this case, the transmitted data must be in the same format as the form's submit(), which type is set to "multipart/form-data".
-Having a look at the MDN web docs to see how you can build a FormData: [Using FormData Objects](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects) and knowing that at this very moment (Cypress 2.1.0) cy.request doesn't support FormData (multipart/form-data), the test can be performed as follows.
+Having a look at the MDN web docs to see how you can build a FormData: [Using FormData Objects](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects), and knowing that at this very moment (Cypress 2.1.0) cy.request doesn't support FormData (multipart/form-data) so we will need a [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), the test can be performed as follows.
 
 
 Include the following code in your "commands.js" file within the cypress support folder, so the command cy.form_request() can be used from any test:
