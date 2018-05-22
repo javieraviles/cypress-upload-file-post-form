@@ -17,36 +17,19 @@ I want to test a UI where a file has to be selected/uploaded before submitting t
 Include the following code in your "commands.js" file within the cypress support folder, so the command cy.upload_file() can be used from any test:
 
 ```
-Cypress.Commands.add('upload_file', (fileName, fileType, selector) => {
+Cypress.Commands.add('upload_file', (fileName, fileType = ' ', selector) => {
     cy.get(selector).then(subject => {
-        cy.fixture(fileName, 'hex').then((fileHex) => {
-
-            const fileBytes = hexStringToByte(fileHex);
-            const testFile = new File([fileBytes], fileName, {
-                type: fileType
-            });
-            const dataTransfer = new DataTransfer()
-            const el = subject[0]
-
-            dataTransfer.items.add(testFile)
-            el.files = dataTransfer.files
+      cy.fixture(fileName, 'base64')
+        .then(Cypress.Blob.base64StringToBlob)
+        .then(blob => {
+          const el = subject[0]
+          const testFile = new File([blob], fileName, { type: fileType })
+          const dataTransfer = new DataTransfer()
+          dataTransfer.items.add(testFile)
+          el.files = dataTransfer.files
         })
     })
-})
-
-// UTILS
-function hexStringToByte(str) {
-    if (!str) {
-        return new Uint8Array();
-    }
-
-    var a = [];
-    for (var i = 0, len = str.length; i < len; i += 2) {
-        a.push(parseInt(str.substr(i, 2), 16));
-    }
-
-    return new Uint8Array(a);
-}
+  })
 ```
 
 Then, in case you want to upload an excel file, fill in other inputs and submit the form, the test would be something like this:
