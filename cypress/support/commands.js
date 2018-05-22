@@ -24,22 +24,20 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('upload_file', (fileName, fileType, selector) => {
+
+Cypress.Commands.add('upload_file', (fileName, fileType = ' ', selector) => {
     cy.get(selector).then(subject => {
-        cy.fixture(fileName, 'hex').then((fileHex) => {
-
-            const fileBytes = hexStringToByte(fileHex);
-            const testFile = new File([fileBytes], fileName, {
-                type: fileType
-            });
-            const dataTransfer = new DataTransfer()
-            const el = subject[0]
-
-            dataTransfer.items.add(testFile)
-            el.files = dataTransfer.files
+      cy.fixture(fileName, 'base64')
+        .then(Cypress.Blob.base64StringToBlob)
+        .then(blob => {
+          const el = subject[0]
+          const testFile = new File([blob], fileName, { type: fileType })
+          const dataTransfer = new DataTransfer()
+          dataTransfer.items.add(testFile)
+          el.files = dataTransfer.files
         })
     })
-})
+  })
 
 // Performs an XMLHttpRequest instead of a cy.request (able to send data as FormData - multipart/form-data)
 Cypress.Commands.add('form_request', (method, url, formData, done) => {
@@ -53,17 +51,3 @@ Cypress.Commands.add('form_request', (method, url, formData, done) => {
     };
     xhr.send(formData);
 })
-
-// UTILS
-function hexStringToByte(str) {
-    if (!str) {
-        return new Uint8Array();
-    }
-
-    var a = [];
-    for (var i = 0, len = str.length; i < len; i += 2) {
-        a.push(parseInt(str.substr(i, 2), 16));
-    }
-
-    return new Uint8Array(a);
-}
