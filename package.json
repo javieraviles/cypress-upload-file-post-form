@@ -1,6 +1,6 @@
 {
   "name": "cypress-upload-file-post-form",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Solution for two Cypress testing use-cases I came across with: perform a direct http FORM request to the server containing a file and other parameters and upload a file into a form before submission",
   "main": "index.js",
   "scripts": {
